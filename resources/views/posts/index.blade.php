@@ -2,7 +2,7 @@
 
 @section('content')
    <div class="flex justify-center  ">
-       <div class="w-8/12 bg-white p-6 rounded-lg">
+       <div class="w-8/12 bg-green-50 p-6 rounded-lg">
        <form action="{{ route('posts')}}" method="POST" class="mb-4">
         @csrf
             <div class="mb-4">
@@ -28,27 +28,8 @@
         {{-- To show the Posts   --}} 
         @if ($posts->count())
          @foreach ($posts as $post)
-             <div class="mb-4">
-             <a href=""
-              class="font-bold">{{ $post ->user->name}}</a> <span 
-              class="text-gray-600 text-sm">{{$post->created_at->diffForHumans()}}</span>
-
-             <p class="mb-2">{{$post->body}}</p>
-                 <div class="flex items-center">
-                     {{-- like --}}
-                     <form action="" method="POST" class="mr-1">
-                         @csrf
-                         <button type="submit" class="text-blue-500">Like</button>
-                     </form>
-                     {{-- unlink --}}
-                     <form action="" method="POST" class="mr-1">
-                         @csrf
-                         <button type="submit" class="text-red-500">Unlike</button>
-                     </form>
-
-                 </div>
-             </div>
-         @endforeach
+            <x-post :post="$post"/>
+         @endforeach 
          {{$posts->links()}}
             
         @else
